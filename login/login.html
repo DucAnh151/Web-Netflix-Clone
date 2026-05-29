@@ -1,0 +1,73 @@
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netflix - Đăng nhập</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <div class="bg_overlay">
+        <div class="bg_sign_in">
+            <div class="logo-top">
+                <span class="netflix-logo">NETFLIX</span>
+            </div>
+
+            <!-- Tab chuyển đổi -->
+            <div class="tab-container">
+                <button class="tab active" id="tab-signin" onclick="showTab('signin')">Đăng nhập</button>
+                <button class="tab" id="tab-signup" onclick="showTab('signup')">Đăng ký</button>
+            </div>
+
+            <!-- Form Đăng nhập -->
+            <div id="form-signin" class="form-section">
+                <h2>Đăng nhập</h2>
+                <div class="input-group">
+                    <input class="input_text" type="text" id="login-email" placeholder="Email hoặc số điện thoại">
+                    <span class="input-icon">✉</span>
+                </div>
+                <div class="input-group">
+                    <input class="input_text" type="password" id="login-password" placeholder="Mật khẩu">
+                    <span class="input-icon toggle-pw" onclick="togglePassword('login-password')">👁</span>
+                </div>
+                <div id="login-error" class="error-msg"></div>
+                <button class="btn-main" onclick="doLogin()">Đăng nhập</button>
+                <div class="remember-row">
+                    <label><input type="checkbox" id="remember-me"> Ghi nhớ đăng nhập</label>
+                    <a href="#">Cần trợ giúp?</a>
+                </div>
+                <div class="divider"><span>hoặc</span></div>
+                <p class="switch-text">Chưa có tài khoản? <a href="#" onclick="showTab('signup')">Đăng ký ngay.</a></p>
+                <p class="recaptcha-text">Trang này được bảo vệ bởi Google reCAPTCHA. <a href="#">Tìm hiểu thêm.</a></p>
+            </div>
+
+            <!-- Form Đăng ký -->
+            <div id="form-signup" class="form-section" style="display:none">
+                <h2>Đăng ký</h2>
+                <div class="input-group">
+                    <input class="input_text" type="text" id="signup-name" placeholder="Họ và tên">
+                    <span class="input-icon">👤</span>
+                </div>
+                <div class="input-group">
+                    <input class="input_text" type="text" id="signup-email" placeholder="Email hoặc số điện thoại">
+                    <span class="input-icon">✉</span>
+                </div>
+                <div class="input-group">
+                    <input class="input_text" type="password" id="signup-password" placeholder="Mật khẩu (tối thiểu 6 ký tự)">
+                    <span class="input-icon toggle-pw" onclick="togglePassword('signup-password')">👁</span>
+                </div>
+                <div class="input-group">
+                    <input class="input_text" type="password" id="signup-confirm" placeholder="Xác nhận mật khẩu">
+                    <span class="input-icon toggle-pw" onclick="togglePassword('signup-confirm')">👁</span>
+                </div>
+                <div id="signup-error" class="error-msg"></div>
+                <div id="signup-success" class="success-msg"></div>
+                <button class="btn-main" onclick="doSignup()">Đăng ký</button>
+                <p class="switch-text">Đã có tài khoản? <a href="#" onclick="showTab('signin')">Đăng nhập.</a></p>
+                <p class="recaptcha-text">Trang này được bảo vệ bởi Google reCAPTCHA. <a href="#">Tìm hiểu thêm.</a></p>
+            </div>
+        </div>
+    </div>
+    <script src="login.js"></script>
+</body>
+</html>

@@ -1,0 +1,215 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;600&display=swap');
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    background-image: url('background-login.jpg');
+    background-size: cover;
+    background-position: center;
+    font-family: 'Montserrat', Arial, sans-serif;
+    min-height: 100vh;
+}
+
+.bg_overlay {
+    min-height: 100vh;
+    background: rgba(0,0,0,0.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+.bg_sign_in {
+    background: rgba(0,0,0,0.85);
+    border-radius: 8px;
+    width: 100%;
+    max-width: 450px;
+    padding: 40px 48px 60px;
+}
+
+.logo-top {
+    margin-bottom: 28px;
+}
+
+.netflix-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 36px;
+    color: #E50914;
+    letter-spacing: 3px;
+}
+
+/* Tabs */
+.tab-container {
+    display: flex;
+    border-bottom: 2px solid #333;
+    margin-bottom: 28px;
+}
+
+.tab {
+    flex: 1;
+    background: none;
+    border: none;
+    color: #aaa;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 10px 0;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    transition: color 0.2s;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -2px;
+}
+
+.tab:hover { color: white; }
+.tab.active {
+    color: white;
+    border-bottom: 3px solid #E50914;
+}
+
+/* Forms */
+.form-section h2 {
+    color: white;
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 24px;
+}
+
+.input-group {
+    position: relative;
+    margin-bottom: 16px;
+}
+
+.input_text {
+    width: 100%;
+    padding: 14px 44px 14px 16px;
+    background-color: #333;
+    color: white;
+    border: 1px solid #555;
+    border-radius: 5px;
+    font-size: 14px;
+    font-family: 'Montserrat', sans-serif;
+    transition: border-color 0.2s, background 0.2s;
+    outline: none;
+}
+
+.input_text:focus {
+    border-color: #E50914;
+    background-color: #3a3a3a;
+}
+
+.input_text::placeholder { color: #aaa; }
+
+.input-icon {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #aaa;
+    font-size: 16px;
+}
+
+.toggle-pw { cursor: pointer; }
+.toggle-pw:hover { color: white; }
+
+/* Buttons */
+.btn-main {
+    width: 100%;
+    padding: 14px;
+    background-color: #E50914;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 15px;
+    font-weight: 700;
+    font-family: 'Montserrat', sans-serif;
+    cursor: pointer;
+    margin-top: 8px;
+    margin-bottom: 16px;
+    transition: background 0.2s, transform 0.1s;
+    letter-spacing: 0.5px;
+}
+
+.btn-main:hover { background-color: #c4000f; }
+.btn-main:active { transform: scale(0.98); }
+
+/* Remember row */
+.remember-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.remember-row label {
+    color: #aaa;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+}
+
+.remember-row input[type="checkbox"] { accent-color: #E50914; }
+
+/* Divider */
+.divider {
+    text-align: center;
+    position: relative;
+    margin: 16px 0;
+    color: #555;
+    font-size: 13px;
+}
+
+.divider::before, .divider::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 40%;
+    height: 1px;
+    background: #444;
+}
+
+.divider::before { left: 0; }
+.divider::after { right: 0; }
+
+/* Links & text */
+a {
+    text-decoration: none;
+    color: white;
+}
+
+a:hover { text-decoration: underline; }
+
+.switch-text {
+    color: #aaa;
+    font-size: 14px;
+    margin-bottom: 12px;
+}
+
+.switch-text a { color: white; font-weight: 600; }
+
+.recaptcha-text {
+    color: #666;
+    font-size: 12px;
+    line-height: 1.5;
+    margin-top: 20px;
+}
+
+.recaptcha-text a { color: #0080ff; font-size: 12px; }
+
+/* Messages */
+.error-msg {
+    color: #ff6b6b;
+    font-size: 13px;
+    margin-bottom: 8px;
+    min-height: 18px;
+    font-weight: 500;
+}
+
+.success-msg {
+    color: #51cf66;
+    font-size: 13px;
+    margin-bottom: 8px;
+    min-height: 18px;
+    font-weight: 500;
+}

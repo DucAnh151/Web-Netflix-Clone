@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netflix - Ai đang xem?</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="ho_so.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Scripts dùng chung -->
+    <script src="../shared/common.js"></script>
+</head>
+<body>
+    <div class="profile-container">
+        
+        <!-- Logo góc trên -->
+        <div class="logo-top">
+            <span class="netflix-logo">NETFLIX</span>
+        </div>
+
+        <!-- MÀN HÌNH CHÍNH: CHỌN / QUẢN LÝ HỒ SƠ -->
+        <div class="profile-view-box" id="profileViewBox">
+            <h1 id="viewTitle" data-translate="profileSelectTitle">Ai đang xem?</h1>
+            
+            <div class="profiles-list" id="profilesList">
+                <!-- Javascript render profiles list -->
+            </div>
+
+            <div class="profiles-action">
+                <button class="btn-manage" id="btnManage" onclick="toggleEditMode()" data-translate="profileManage">Quản lý hồ sơ</button>
+            </div>
+        </div>
+
+        <!-- MÀN HÌNH CHỈNH SỬA / THÊM HỒ SƠ (MODAL LAYOVER) -->
+        <div class="profile-modal" id="profileModal">
+            <div class="modal-content">
+                <h2 id="modalTitleText">Chỉnh sửa hồ sơ</h2>
+                
+                <div class="modal-form">
+                    <div class="avatar-preview" id="avatarPreview">N</div>
+                    
+                    <div class="form-inputs">
+                        <input type="text" id="profileNameInput" placeholder="Tên hồ sơ" data-translate="profileNamePlaceholder">
+                        
+                        <div class="color-picker-label" data-translate="theme">Chọn màu đại diện:</div>
+                        <div class="color-picker" id="colorPicker">
+                            <span class="color-dot" style="background:#E50914" data-color="#E50914"></span>
+                            <span class="color-dot" style="background:#2b90d9" data-color="#2b90d9"></span>
+                            <span class="color-dot" style="background:#2bd980" data-color="#2bd980"></span>
+                            <span class="color-dot" style="background:#e5b209" data-color="#e5b209"></span>
+                            <span class="color-dot" style="background:#9b59b6" data-color="#9b59b6"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-buttons">
+                    <button class="btn-save" onclick="saveProfileChanges()" data-translate="profileSave">Lưu</button>
+                    <button class="btn-cancel" onclick="closeProfileModal()" data-translate="profileCancel">Hủy</button>
+                    <button class="btn-delete" id="btnDeleteProfile" onclick="deleteProfile()" data-translate="profileDelete">Xóa hồ sơ</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Script điều khiển -->
+    <script src="ho_so.js"></script>
+</body>
+</html>

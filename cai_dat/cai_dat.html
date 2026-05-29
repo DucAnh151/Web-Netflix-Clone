@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netflix - Cài đặt</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="cai_dat.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Scripts dùng chung -->
+    <script src="../shared/common.js"></script>
+</head>
+<body>
+    <!-- Top Navigation Bar -->
+    <div class="settings-header">
+        <div class="header-left">
+            <button class="back-btn" onclick="goBack()"><i class="fa fa-arrow-left"></i> <span data-translate="backToHome">Quay lại</span></button>
+            <span class="netflix-logo" onclick="goBack()">NETFLIX</span>
+        </div>
+        <div class="header-right">
+            <div class="avatar-circle" id="settingsAvatar">N</div>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="settings-container">
+        <h1 class="settings-title" data-translate="settingsTitle">Cài đặt</h1>
+
+        <div class="settings-grid">
+            
+            <!-- Cột Trái: Cài đặt Tài khoản -->
+            <div class="settings-card">
+                <h2 data-translate="accountSettings">Cài đặt tài khoản</h2>
+                <div class="card-body">
+                    
+                    <!-- Đổi tên hiển thị -->
+                    <div class="input-group">
+                        <label data-translate="profile">Họ và tên</label>
+                        <input type="text" id="usernameInput" placeholder="Họ và tên">
+                    </div>
+
+                    <!-- Email hiển thị -->
+                    <div class="input-group">
+                        <label>Email</label>
+                        <input type="text" id="emailDisplay" disabled style="opacity: 0.6; cursor: not-allowed;">
+                    </div>
+
+                    <div class="divider"></div>
+
+                    <!-- Đổi mật khẩu -->
+                    <h3 data-translate="changePassword" style="font-size:15px; margin-bottom:12px;">Đổi mật khẩu</h3>
+                    <div class="input-group">
+                        <label data-translate="oldPassword">Mật khẩu cũ</label>
+                        <input type="password" id="oldPassInput">
+                    </div>
+                    <div class="input-group">
+                        <label data-translate="newPassword">Mật khẩu mới</label>
+                        <input type="password" id="newPassInput">
+                    </div>
+                    <div class="input-group">
+                        <label data-translate="confirmPassword">Xác nhận mật khẩu</label>
+                        <input type="password" id="confirmPassInput">
+                    </div>
+
+                    <div id="passMsg" class="msg-box"></div>
+                    <button class="btn-save-settings" onclick="saveAccountSettings()" data-translate="profileSave">Lưu thay đổi</button>
+                </div>
+            </div>
+
+            <!-- Cột Phải: Cài đặt Hiển thị & Dữ liệu -->
+            <div class="settings-card">
+                <h2 data-translate="visualSettings">Tùy chỉnh hiển thị & Hệ thống</h2>
+                <div class="card-body">
+                    
+                    <!-- Đổi Theme -->
+                    <div class="input-group">
+                        <label data-translate="theme">Giao diện</label>
+                        <select id="themeSelect" onchange="changeThemeSetting()">
+                            <option value="dark" data-translate="themeDark">Tối</option>
+                            <option value="light" data-translate="themeLight">Sáng</option>
+                        </select>
+                    </div>
+
+                    <!-- Đổi Ngôn ngữ -->
+                    <div class="input-group">
+                        <label data-translate="language">Ngôn ngữ</label>
+                        <select id="langSelect" onchange="changeLangSetting()">
+                            <option value="vi">Tiếng Việt</option>
+                            <option value="en">English</option>
+                        </select>
+                    </div>
+
+                    <!-- Xem gói dịch vụ giả lập -->
+                    <div class="plan-box">
+                        <div class="plan-header">Netflix Premium</div>
+                        <div class="plan-sub">Ultra HD 4K + HDR • 4 Thiết bị</div>
+                    </div>
+
+                    <div class="divider"></div>
+
+                    <!-- Quản lý Dữ liệu -->
+                    <h3 style="font-size:15px; margin-bottom:12px;" data-translate="settingsTitle">Dữ liệu Local Storage</h3>
+                    <div class="danger-zone">
+                        <button class="btn-danger-outline" onclick="clearWatchList()" data-translate="removeFromList">Xóa Danh sách của tôi</button>
+                        <button class="btn-danger-outline" onclick="clearAllReviews()">Xóa toàn bộ Lịch sử đánh giá</button>
+                        <button class="btn-logout" onclick="doLogout()" data-translate="logout"><i class="fa fa-sign-out"></i> Đăng xuất</button>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p class="footer-copy">© 1997–2025 Netflix, Inc.</p>
+    </div>
+
+    <!-- Page script -->
+    <script src="cai_dat.js"></script>
+</body>
+</html>

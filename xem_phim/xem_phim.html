@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netflix - Xem Phim</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="xem_phim.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Scripts dùng chung -->
+    <script src="../shared/movies.js"></script>
+    <script src="../shared/common.js"></script>
+</head>
+<body>
+    <!-- Top Navigation Bar -->
+    <div class="watch-header">
+        <div class="header-left">
+            <button class="back-btn" onclick="goBack()"><i class="fa fa-arrow-left"></i> <span data-translate="backToHome">Quay lại</span></button>
+            <span class="netflix-logo" onclick="goBack()">NETFLIX</span>
+        </div>
+        <div class="header-right">
+            <div class="avatar-circle" id="headerAvatar">N</div>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="watch-container">
+        
+        <!-- Video Player Section -->
+        <div class="player-wrapper">
+            <!-- Sẽ chèn tag video hoặc iframe động từ javascript -->
+            <div id="videoContainer" class="video-container"></div>
+        </div>
+
+        <!-- Movie Details Section -->
+        <div class="details-section">
+            <div class="details-main">
+                <div class="details-header">
+                    <h1 class="movie-title" id="movieTitle">...</h1>
+                    <div class="meta-row">
+                        <span class="meta-item rating-score" id="movieRating">⭐ 9.0</span>
+                        <span class="meta-item" id="movieYear">2021</span>
+                        <span class="meta-item" id="movieDuration">148 phút</span>
+                        <span class="meta-item hd-badge">Ultra HD 4K</span>
+                        <span class="meta-item" id="movieViews">👁 1.2M lượt xem</span>
+                    </div>
+                </div>
+                <div class="action-buttons">
+                    <button class="btn-mylist" id="mylistBtn">➕ Danh sách của tôi</button>
+                </div>
+                <div class="movie-desc" id="movieDesc">
+                    ...
+                </div>
+            </div>
+
+            <!-- Sidebar Details (Cast, Category) -->
+            <div class="details-sidebar">
+                <div class="sidebar-item">
+                    <span class="sidebar-label" data-translate="cast">Diễn viên</span>:
+                    <span class="sidebar-value" id="movieCast">...</span>
+                </div>
+                <div class="sidebar-item">
+                    <span class="sidebar-label" data-translate="director">Đạo diễn</span>:
+                    <span class="sidebar-value" id="movieDirector">...</span>
+                </div>
+                <div class="sidebar-item">
+                    <span class="sidebar-label" data-translate="category">Thể loại</span>:
+                    <span class="sidebar-value" id="movieCategory">...</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recommendations Section -->
+        <div class="recommendations-section">
+            <h2 class="section-title" data-translate="similarMovies">Đề xuất phim cùng thể loại</h2>
+            <div class="slider-container-wrapper">
+                <button class="slider-btn slider-btn-left" onclick="scrollSlider(-1)">‹</button>
+                <div class="menu_phim" id="recommendationsSlider">
+                    <!-- Javascript render cards -->
+                </div>
+                <button class="slider-btn slider-btn-right" onclick="scrollSlider(1)">›</button>
+            </div>
+        </div>
+
+        <!-- Reviews & Ratings Section -->
+        <div class="reviews-section">
+            <h2 class="section-title" data-translate="commentsTitle">Đánh giá & Bình luận</h2>
+            
+            <div class="reviews-layout">
+                
+                <!-- Form đánh giá mới -->
+                <div class="review-form-card">
+                    <h3 data-translate="submitReview">Gửi đánh giá của bạn</h3>
+                    
+                    <!-- Chấm sao -->
+                    <div class="star-rating-input">
+                        <span class="star-input-btn" data-value="1">★</span>
+                        <span class="star-input-btn" data-value="2">★</span>
+                        <span class="star-input-btn" data-value="3">★</span>
+                        <span class="star-input-btn" data-value="4">★</span>
+                        <span class="star-input-btn" data-value="5">★</span>
+                    </div>
+                    
+                    <textarea class="review-textarea" id="reviewComment" placeholder="Viết nhận xét của bạn ở đây..." data-translate="writeComment"></textarea>
+                    
+                    <button class="btn-submit-review" onclick="submitReview()" data-translate="submitReview">Gửi đánh giá</button>
+                </div>
+
+                <!-- Danh sách đánh giá -->
+                <div class="reviews-list-container">
+                    <div class="average-rating-display">
+                        <div class="avg-stars" id="avgStarsDisplay">⭐⭐⭐⭐⭐</div>
+                        <div class="avg-text"><span id="avgRatingScore">0.0</span> / 5 (<span id="totalReviewsCount">0</span> <span data-translate="rating">đánh giá</span>)</div>
+                    </div>
+                    <div class="reviews-list" id="reviewsList">
+                        <!-- Danh sách các bình luận -->
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <div class="menu_icon">
+            <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+            <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+            <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+            <a href="#"><i class="fa fa-youtube-play" aria-hidden="true"></i></a>
+        </div>
+        <p class="footer-copy">© 1997–2025 Netflix, Inc.</p>
+    </div>
+
+    <!-- Page script -->
+    <script src="xem_phim.js"></script>
+</body>
+</html>

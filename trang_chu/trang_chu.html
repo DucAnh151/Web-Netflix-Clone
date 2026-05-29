@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netflix - Trang chủ</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="trang_chu.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Scripts dùng chung -->
+    <script src="../shared/movies.js"></script>
+    <script src="../shared/common.js"></script>
+</head>
+<body>
+    <!-- Menu -->
+    <div class="menu" id="mainMenu">
+        <div class="menu-left">
+            <span class="netflix-logo">NETFLIX</span>
+            <div class="nav-links">
+                <a href="#all" id="nav-all" class="nav-link active" data-translate="home">Trang chủ</a>
+                <a href="#tv-shows" id="nav-tv" class="nav-link" data-translate="tvShows">Phim truyền hình</a>
+                <a href="#movies" id="nav-movies" class="nav-link" data-translate="movies">Phim</a>
+                <a href="#new" id="nav-new" class="nav-link" data-translate="newPopular">Mới &amp; Phổ biến</a>
+                <a href="#my-list" id="nav-mylist" class="nav-link" data-translate="myList">Danh sách của tôi</a>
+            </div>
+        </div>
+        <div class="menu-right">
+            <!-- Tìm kiếm -->
+            <div class="search-wrapper">
+                <button class="search-btn" onclick="toggleSearch()" title="Tìm kiếm"><i class="fa fa-search" aria-hidden="true"></i></button>
+                <input type="text" id="searchInput" class="search-input" placeholder="Tìm kiếm phim..." data-translate="searchPlaceholder" oninput="handleSearch()">
+            </div>
+
+            <!-- Nút đổi chế độ sáng/tối -->
+            <button class="theme-btn" onclick="toggleTheme()" title="Đổi chế độ sáng/tối">
+                <span id="theme-icon">☀️</span>
+            </button>
+
+            <!-- Duyệt tìm theo ngôn ngữ Dropdown -->
+            <div class="lang-dropdown-wrapper">
+                <button class="lang-btn" onclick="toggleLangDropdown(event)" data-translate="browseLanguage">
+                    Duyệt tìm theo ngôn ngữ <span class="arrow-down">▾</span>
+                </button>
+                <div class="lang-dropdown-menu" id="langDropdown">
+                    <a href="#" onclick="changeLang('vi', event)">Tiếng Việt</a>
+                    <a href="#" onclick="changeLang('en', event)">English</a>
+                </div>
+            </div>
+
+            <!-- Chuông thông báo -->
+            <div class="bell-wrapper">
+                <button class="bell-btn" onclick="toggleBell(event)" title="Thông báo">
+                    <i class="fa fa-bell" aria-hidden="true" style="font-size:18px;"></i>
+                </button>
+                <div class="bell-popover" id="bellPopover">
+                    <span data-translate="noNotifications">Hiện không có thông báo nào.</span>
+                </div>
+            </div>
+
+            <!-- Avatar dropdown -->
+            <div class="avatar-wrapper" onclick="toggleDropdown(event)">
+                <div class="avatar-circle" id="avatarCircle">N</div>
+                <span class="arrow-down">▾</span>
+                <div class="dropdown-menu" id="dropdownMenu">
+                    <div class="dropdown-user" id="dropdownUser">Người dùng</div>
+                    <div class="dropdown-divider"></div>
+                    <a href="../ho_so/ho_so.html" class="dropdown-item"><i class="fa fa-user"></i> <span data-translate="profile">Hồ sơ</span></a>
+                    <a href="../cai_dat/cai_dat.html" class="dropdown-item"><i class="fa fa-cog"></i> <span data-translate="settings">Cài đặt</span></a>
+                    <a href="../tro_giup/tro_giup.html" class="dropdown-item"><i class="fa fa-question-circle"></i> <span data-translate="help">Trợ giúp</span></a>
+                    <div class="dropdown-divider"></div>
+                    <a href="#" class="dropdown-item logout-item" onclick="doLogout()"><i class="fa fa-sign-out"></i> <span data-translate="logout">Đăng xuất</span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Banner chính -->
+    <div class="banner" id="bannerEl">
+        <div class="banner-gradient"></div>
+        <div class="mo_ta">
+            <div class="badge" id="bannerBadge">🔥 #1 Đề cử tuần này</div>
+            <div class="ten-phim" id="bannerTitle">Dragon Ball Super: Broly</div>
+            <div class="banner-meta">
+                <span class="view" id="bannerViews">👁 2.4M lượt xem</span>
+                <span class="banner-rating" id="bannerRating">⭐ 8.7/10</span>
+                <span class="banner-year" id="bannerYear">2019</span>
+            </div>
+            <div class="tom-tat" id="bannerDesc">Trận chiến đỉnh cao giữa Goku, Vegeta và Broly — chiến binh Saiyan huyền thoại. Một cuộc đối đầu sẽ rung chuyển toàn vũ trụ.</div>
+            <div class="banner-buttons">
+                <button class="btn-play" id="bannerPlayBtn">▶ Xem ngay</button>
+                <button class="btn-info" id="bannerInfoBtn">ℹ Thông tin</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Danh sách phim phân loại (Render động) -->
+    <div class="film-lists" id="filmListsContainer">
+        <!-- Chèn các hàng danh mục phim ở đây -->
+    </div>
+
+    <!-- Modal Chi tiết Phim (Netflix-style) -->
+    <div class="modal-overlay" id="infoModal" onclick="closeInfoModal(event)">
+        <div class="info-modal-box">
+            <button class="modal-close" onclick="closeInfoModalBtn()">✕</button>
+            
+            <!-- Banner phía trên của modal -->
+            <div class="info-modal-banner" id="modalBanner">
+                <div class="info-modal-banner-gradient"></div>
+                <div class="info-modal-banner-content">
+                    <h2 class="info-modal-title" id="modalTitle"></h2>
+                    <div class="info-modal-buttons">
+                        <button class="btn-play-modal" id="modalPlayBtn">▶ Xem ngay</button>
+                        <button class="btn-mylist-modal" id="modalMyListBtn">➕ Danh sách của tôi</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Chi tiết phim phía dưới -->
+            <div class="info-modal-body">
+                <div class="info-modal-grid">
+                    <div class="info-modal-left">
+                        <div class="info-modal-meta">
+                            <span class="meta-rating" id="modalRating">⭐ 8.7</span>
+                            <span class="meta-year" id="modalYear">2019</span>
+                            <span class="meta-duration" id="modalDuration">100 phút</span>
+                            <span class="meta-badge">HD</span>
+                        </div>
+                        <p class="info-modal-desc" id="modalDesc"></p>
+                    </div>
+                    <div class="info-modal-right">
+                        <div><span class="meta-label" data-translate="cast">Diễn viên</span>: <span id="modalCast" class="meta-value"></span></div>
+                        <div><span class="meta-label" data-translate="director">Đạo diễn</span>: <span id="modalDirector" class="meta-value"></span></div>
+                        <div><span class="meta-label" data-translate="category">Thể loại</span>: <span id="modalCategory" class="meta-value"></span></div>
+                    </div>
+                </div>
+                
+                <!-- Đề xuất phim cùng thể loại -->
+                <div class="info-modal-similar">
+                    <h3 data-translate="similarMovies">Đề xuất phim cùng thể loại</h3>
+                    <div class="similar-grid" id="modalSimilarGrid">
+                        <!-- Thẻ phim tương tự -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <div class="menu_icon">
+            <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+            <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+            <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+            <a href="#"><i class="fa fa-youtube-play" aria-hidden="true"></i></a>
+        </div>
+        <div class="menu_footer">
+            <div class="mo-ta">
+                <p>Mô tả âm thanh</p><p>Trung tâm trợ giúp</p><p>Công việc</p><p>Thẻ quà tặng</p>
+            </div>
+            <div class="mo-ta">
+                <p>Quan hệ nhà đầu tư</p><p>Điều khoản sử dụng</p><p>Quyền riêng tư</p><p>Thông tin pháp lý</p>
+            </div>
+            <div class="mo-ta">
+                <p>Cách Netflix hoạt động</p><p>Tuyển dụng</p><p>Cookie</p><p>Chỉ chia sẻ thông tin cá nhân</p>
+            </div>
+            <div class="mo-ta">
+                <p>Truyền thông</p><p>Liên hệ</p><p>Điều khoản pháp lý</p><p>Khả năng tiếp cận Netflix</p>
+            </div>
+        </div>
+        <p class="footer-copy">© 1997–2025 Netflix, Inc.</p>
+    </div>
+
+    <!-- Script điều khiển chính -->
+    <script src="trang_chu.js"></script>
+</body>
+</html>
