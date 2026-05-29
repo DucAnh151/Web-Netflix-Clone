@@ -257,6 +257,56 @@ function isInMyList(filmId) {
     return getMyList().includes(filmId);
 }
 
+// ===== QUẢN LÝ TIẾN TRÌNH XEM (WATCH PROGRESS) =====
+function getWatchProgressList() {
+    const profile = getActiveProfile();
+    if (!profile) return [];
+    const key = `netflix_progress_${profile.id}`;
+    const data = localStorage.getItem(key);
+    return data ? JSON.parse(data) : [];
+}
+
+function saveWatchProgress(filmId, currentTime, duration) {
+    const profile = getActiveProfile();
+    if (!profile) return;
+    const key = `netflix_progress_${profile.id}`;
+    let list = getWatchProgressList();
+    
+    const progressPercent = Math.round((currentTime / duration) * 100);
+    
+    // Xóa bản ghi cũ để đẩy bản ghi mới lên đầu (sắp xếp theo thời gian xem gần nhất)
+    list = list.filter(item => item.filmId !== filmId);
+    
+    // Chỉ lưu nếu tiến trình xem từ 1% đến 95% (nếu xem xong >95% thì coi như hoàn thành)
+    if (progressPercent >= 1 && progressPercent <= 95) {
+        list.unshift({
+            filmId,
+            currentTime,
+            duration,
+            progressPercent,
+            lastWatched: Date.now()
+        });
+    }
+    
+    localStorage.setItem(key, JSON.stringify(list));
+    window.dispatchEvent(new Event('progresschanged'));
+}
+
+function getMovieProgress(filmId) {
+    const list = getWatchProgressList();
+    return list.find(item => item.filmId === filmId) || null;
+}
+
+function removeWatchProgress(filmId) {
+    const profile = getActiveProfile();
+    if (!profile) return;
+    const key = `netflix_progress_${profile.id}`;
+    let list = getWatchProgressList();
+    list = list.filter(item => item.filmId !== filmId);
+    localStorage.setItem(key, JSON.stringify(list));
+    window.dispatchEvent(new Event('progresschanged'));
+}
+
 // ===== QUẢN LÝ HỒ SƠ (PROFILES) =====
 const defaultProfiles = [
     { id: 'p1', name: 'User 1', avatar: '#E50914' },

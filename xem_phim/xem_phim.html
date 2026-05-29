@@ -6,10 +6,13 @@
     <title>Netflix - Xem Phim</title>
     <!-- CSS -->
     <link rel="stylesheet" href="xem_phim.css">
+    <link rel="stylesheet" href="../shared/toast.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Scripts dùng chung -->
     <script src="../shared/movies.js"></script>
     <script src="../shared/common.js"></script>
+    <script src="../shared/toast.js"></script>
+    <script src="../shared/api.js"></script>
 </head>
 <body>
     <!-- Top Navigation Bar -->
@@ -110,7 +113,7 @@
                 <div class="reviews-list-container">
                     <div class="average-rating-display">
                         <div class="avg-stars" id="avgStarsDisplay">⭐⭐⭐⭐⭐</div>
-                        <div class="avg-text"><span id="avgRatingScore">0.0</span> / 5 (<span id="totalReviewsCount">0</span> <span data-translate="rating">đánh giá</span>)</div>
+                        <div class="avg-text"><span id="avgRatingScore">0.0</span> / 10 (<span id="totalReviewsCount">0</span> <span data-translate="rating">đánh giá</span>)</div>
                     </div>
                     <div class="reviews-list" id="reviewsList">
                         <!-- Danh sách các bình luận -->
@@ -133,7 +136,10 @@
         <p class="footer-copy">© 1997–2025 Netflix, Inc.</p>
     </div>
 
-    <!-- Page script -->
+    <!-- Page scripts -->
+    <script src="modules/videoPlayer.js"></script>
+    <script src="modules/recommendations.js"></script>
+    <script src="modules/reviewSystem.js"></script>
     <script src="xem_phim.js"></script>
 </body>
 </html>

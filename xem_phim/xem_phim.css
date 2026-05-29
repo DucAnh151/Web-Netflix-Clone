@@ -215,7 +215,7 @@ button, a {
     font-size: 14px;
     font-weight: 600;
     cursor: pointer;
-    transition: background 0.2s, border-color 0.2s;
+    transition: background 0.2s, border-color 0.2s, color 0.2s;
 }
 
 .btn-mylist:hover {
@@ -223,13 +223,36 @@ button, a {
     border-color: var(--text);
 }
 
+.btn-mylist.in-list {
+    background: rgba(229, 9, 20, 0.2);
+    border-color: var(--red);
+    color: var(--red);
+}
+
+.btn-mylist.in-list:hover {
+    background: rgba(229, 9, 20, 0.3);
+    border-color: var(--red);
+}
+
 [data-theme="light"] .btn-mylist {
     background: rgba(0, 0, 0, 0.05);
     border: 1px solid rgba(0, 0, 0, 0.15);
+    color: var(--text);
 }
 
 [data-theme="light"] .btn-mylist:hover {
     background: rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] .btn-mylist.in-list {
+    background: rgba(229, 9, 20, 0.1);
+    border-color: var(--red);
+    color: var(--red);
+}
+
+[data-theme="light"] .btn-mylist.in-list:hover {
+    background: rgba(229, 9, 20, 0.2);
+    border-color: var(--red);
 }
 
 .movie-desc {
@@ -301,9 +324,32 @@ button, a {
     cursor: pointer;
     border-radius: 6px;
     overflow: hidden;
-    transition: transform 0.25s, box-shadow 0.25s;
+    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s ease;
     width: 210px;
     height: 118px;
+}
+
+/* Skeleton Loading State */
+.skeleton-card {
+    width: 210px;
+    height: 118px;
+    border-radius: 6px;
+    flex-shrink: 0;
+    animation: skeleton-loading 1s linear infinite alternate;
+}
+
+[data-theme="light"] .skeleton-card {
+    animation: skeleton-loading-light 1s linear infinite alternate;
+}
+
+@keyframes skeleton-loading {
+    0% { background-color: rgba(255, 255, 255, 0.05); }
+    100% { background-color: rgba(255, 255, 255, 0.15); }
+}
+
+@keyframes skeleton-loading-light {
+    0% { background-color: rgba(0, 0, 0, 0.05); }
+    100% { background-color: rgba(0, 0, 0, 0.12); }
 }
 
 .film-card:hover {
@@ -622,4 +668,82 @@ button, a {
     .watch-container {
         margin-top: 15px;
     }
+}
+
+/* ===== RESUME PLAYBACK OVERLAY ===== */
+.resume-overlay {
+    position: absolute;
+    bottom: 60px;
+    left: 30px;
+    background: rgba(20, 20, 20, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 6px;
+    padding: 16px 20px;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 340px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    transition: opacity 0.3s ease;
+}
+
+[data-theme="light"] .resume-overlay {
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.resume-overlay p {
+    font-size: 13.5px;
+    font-weight: 600;
+    line-height: 1.5;
+    color: var(--text);
+}
+
+.resume-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-resume {
+    background: var(--red);
+    color: white;
+    border: none;
+    padding: 7px 15px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background var(--transition);
+}
+
+.btn-resume:hover {
+    background: var(--red-hover);
+}
+
+.btn-resume-cancel {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 7px 15px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background var(--transition);
+}
+
+[data-theme="light"] .btn-resume-cancel {
+    background: rgba(0, 0, 0, 0.05);
+    border-color: rgba(0, 0, 0, 0.2);
+}
+
+.btn-resume-cancel:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+[data-theme="light"] .btn-resume-cancel:hover {
+    background: rgba(0, 0, 0, 0.1);
 }

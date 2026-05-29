@@ -6,10 +6,13 @@
     <title>Netflix - Trang chủ</title>
     <!-- CSS -->
     <link rel="stylesheet" href="trang_chu.css">
+    <link rel="stylesheet" href="../shared/toast.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Scripts dùng chung -->
     <script src="../shared/movies.js"></script>
     <script src="../shared/common.js"></script>
+    <script src="../shared/toast.js"></script>
+    <script src="../shared/api.js"></script>
 </head>
 <body>
     <!-- Menu -->
@@ -29,6 +32,7 @@
             <div class="search-wrapper">
                 <button class="search-btn" onclick="toggleSearch()" title="Tìm kiếm"><i class="fa fa-search" aria-hidden="true"></i></button>
                 <input type="text" id="searchInput" class="search-input" placeholder="Tìm kiếm phim..." data-translate="searchPlaceholder" oninput="handleSearch()">
+                <div id="searchAutocomplete" class="search-autocomplete"></div>
             </div>
 
             <!-- Nút đổi chế độ sáng/tối -->
@@ -63,7 +67,9 @@
                 <span class="arrow-down">▾</span>
                 <div class="dropdown-menu" id="dropdownMenu">
                     <div class="dropdown-user" id="dropdownUser">Người dùng</div>
-                    <div class="dropdown-divider"></div>
+                    <div class="dropdown-divider" style="margin-bottom: 8px;"></div>
+                    <div id="dropdownProfilesList"></div>
+                    <div class="dropdown-divider" style="margin-top: 8px;"></div>
                     <a href="../ho_so/ho_so.html" class="dropdown-item"><i class="fa fa-user"></i> <span data-translate="profile">Hồ sơ</span></a>
                     <a href="../cai_dat/cai_dat.html" class="dropdown-item"><i class="fa fa-cog"></i> <span data-translate="settings">Cài đặt</span></a>
                     <a href="../tro_giup/tro_giup.html" class="dropdown-item"><i class="fa fa-question-circle"></i> <span data-translate="help">Trợ giúp</span></a>
@@ -110,6 +116,7 @@
                     <h2 class="info-modal-title" id="modalTitle"></h2>
                     <div class="info-modal-buttons">
                         <button class="btn-play-modal" id="modalPlayBtn">▶ Xem ngay</button>
+                        <button class="btn-trailer-modal" id="modalTrailerBtn">🎬 Xem Trailer</button>
                         <button class="btn-mylist-modal" id="modalMyListBtn">➕ Danh sách của tôi</button>
                     </div>
                 </div>
@@ -142,6 +149,14 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- Trailer Modal (Embedded YouTube) -->
+    <div class="modal-overlay" id="trailerModal" onclick="closeTrailerModal(event)" style="z-index: 10000;">
+        <div class="trailer-modal-box" style="position: relative; max-width: 900px; width: 95%; aspect-ratio: 16/9; background: #000; border-radius: 8px; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.8); animation: scaleUp 0.3s ease;">
+            <button class="modal-close" onclick="closeTrailerModalBtn()" style="top: 10px; right: 10px; z-index: 20;">✕</button>
+            <div id="trailerVideoContainer" style="width: 100%; height: 100%;"></div>
         </div>
     </div>
 
