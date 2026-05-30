@@ -231,7 +231,7 @@ Trong quá trình phát triển ứng dụng này, tôi đã gặp phải một 
 * **Họ và tên:** *Phạm Đức Anh*
 * **Vị trí mong muốn:** Frontend Intern / Junior Frontend Developer
 * **GitHub:** [DucAnh151](https://github.com/DucAnh151)
-* **Email:** *pducanh151204.email@example.com*
+* **Email:** *pducanh151204@gmail.com*
 * **LinkedIn:** *www.linkedin.com/in/ducanhpahm1525*
 
 ---
